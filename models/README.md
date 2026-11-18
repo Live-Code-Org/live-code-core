@@ -1,14 +1,21 @@
-# 🧬 Models: The Data Contract
+# Models: The Data Contract
 
-**Current Version:** `v0.1.0-alpha`
+**Current Version:** `v0.2.0-alpha (MVP)`
 
-## What happens here?
-This directory is the absolute heart of the TeamCode logic. It contains the **Mongoose Schemas** that define our data structures. 
+## Overview
+This directory defines the **Mongoose Schemas** that serve as the data contract for the **Live Code** platform. 
 
-Instead of hiding our logic, we open-source our database architecture. We want our community to see exactly how a Developer (`User`) is matched, and how a Startup (`Team`) is structured. You'll notice our models are rich with validation and indexing—this is intentional, to ensure our matchmaking engine runs at lightning speed.
+In accordance with our **Open Core** architecture, our database structures are completely open-source and documented. Contributors and integrators can inspect the exact data shapes, validation rules, and compound indexes powering our matchmaking engine and proof-of-work tracking.
 
-## 🗺️ Roadmap & Progress
+## Schemas in This Directory
 
-- [x] **User Schema:** Identity, Matchmaking parameters, and the Certification engine.
-- [x] **Team Schema:** Project metadata, GitHub repository integration (Forks & New Repos), and Team Lifecycle.
-- [ ] **ActivityLog Schema (Planned):** For tracking live GitHub events (Commits, PRs) before updating the User/Team metrics.
+* **`User.js`:** Developer profiles, matchmaking parameters (`techStack`, `workStyle`, `weeklyHours`), certification status, and the 4-axis rating system (`codeQuality`, `collaboration`, `reliability`, `productImpact`).
+* **`Team.js`:** Project metadata, lifecycle stages (`sandbox` to `market_product`), sub-team hierarchy (`parentTeam`), GitHub App automation configs, and project/team health metrics.
+* **`ScoreEvent.js`:** Immutable audit log for reputation changes, implementing the **14-Day Escrow** (`vestsAt`) and **Shared Fate** (`reviewerIds`) anti-gaming mechanisms.
+
+## Development Roadmap & Progress
+
+- [x] **User Schema:** Identity, Matchmaking parameters, Certification engine, and 4-Axis Rating model.
+- [x] **Team Schema:** Project metadata, Lifecycle stages, GitHub automation config, and Team/Project metrics.
+- [x] **ScoreEvent Schema:** Reputation event ledger with 14-day vesting escrow and background worker indexing.
+- [ ] **Showcase Schema (Planned):** Public portfolio records for graduated teams and verified contribution breakdowns.

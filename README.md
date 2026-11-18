@@ -1,20 +1,20 @@
-# TeamCode  | Open Core API
+# Live Code | Core API
 
-Welcome to the **TeamCode Open Core API** repository. 
-This is the backend engine powering the TeamCode platform—a project incubator that connects junior developers into balanced teams to build real-world Open Source products.
+Welcome to the **Live Code Core API** repository. 
+This is the backend engine powering the Live Code platform—a project incubator that connects junior developers into balanced teams to build real-world Open Source products.
 
 **Current Version:** `v0.1.0-alpha`
 
-##  Architecture & Philosophy
+## Architecture & Philosophy
 
-TeamCode operates on an **Open Core** model. This repository contains the transparent, open-source foundation of the platform:
-*   **Data Models (`/models`):** The exact Mongoose schemas defining our Developers and Teams.
+Live Code operates on an **Open Core** model. This repository contains the transparent, open-source foundation of the platform:
+*   **Data Models (`/models`):** The Mongoose schemas defining our Developers and Teams.
 *   **API Layer (`/routes` & `/controllers`):** The RESTful endpoints managing the application state.
 *   **Infrastructure (`/config`):** Server bootstrap and database connections.
 
-*(Note: Internal algorithms for calculating Reputation Scores and webhook validations are maintained in a separate closed-core service to protect the integrity of the platform).*
+*(Note: Internal algorithms for calculating Reputation Scores and webhook validations are maintained in a separate service to protect the integrity of the platform).*
 
-##  Development Roadmap & Progress
+## Development Roadmap & Progress
 
 We are currently building the MVP. Here is our live tracking checklist:
 
@@ -24,15 +24,14 @@ We are currently building the MVP. Here is our live tracking checklist:
 - [ ] **Phase 4:** Matchmaking & Discovery Engine endpoints.
 - [ ] **Phase 5:** GitHub Webhooks Integration.
 
-##  Local Development Setup
+## Local Development Setup
 
 Want to contribute or run the server locally? Follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Live-Code-Org/TeamCode-mvp.git
-   cd TeamCode-mvp
-   ```
+   git clone https://github.com/Live-Code-Org/live-code-core.git
+   cd live-code-core
 
 2. **Install dependencies:**
    ```bash
@@ -51,3 +50,6 @@ Want to contribute or run the server locally? Follow these steps:
    node server.js
    ```
    *You should see "MongoDB Connected" and "Server is running" in your console.*
+
+   ---
+   *Bulid with ❤️  by LiveCode community*

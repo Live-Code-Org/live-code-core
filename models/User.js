@@ -92,6 +92,12 @@ const userSchema = new mongoose.Schema({
     mergedPRs: {type: Number, min: 0, default: 0} ,
     codeReviews: {type: Number, min: 0, default: 0} ,
     completedTeams: {type: Number, min: 0, default: 0} , 
+    ratingAxes: {
+      codeQuality: {type: Number, min: 0, default: 0},
+      collaboration: {type: Number, min: 0, default: 0},
+      reliability : {type: Number, min: 0, default: 100},
+      productImpact: {type: Number, min: 0, default: 0}
+    }
   },
   lastActiveAt: {
     type: Date,

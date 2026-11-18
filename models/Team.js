@@ -39,6 +39,18 @@ const teamSchema = new Schema(
       enum: ['recruiting', 'active', 'graduated', 'archived'],
       default: 'recruiting',
     },
+    lifecycleStage: {
+      type: String,
+      enum: ['sandbox', 'mvp', 'beta', 'market_product'],
+      default: 'sandbox'
+    },
+    parentTeam: {
+      type: Schema.Types.ObjectId,
+      ref: 'Team',
+      default: null
+    },
+
+
 
     // ---- 2. GitHub Infrastructure (New repos & Forks) ----
     github: {
@@ -61,6 +73,24 @@ const teamSchema = new Schema(
         type: String,
         trim: true,
         default: null,
+      },
+    },
+
+    githubConfig: {
+      installationId: {
+        type: String, 
+        trim: true, 
+        default: null
+      },
+      repoName: {
+        type: String, 
+        lowercase: true, 
+        trim: true,
+        default: null
+      },
+      isSynced: {
+        type: Boolean,
+        default: false
       },
     },
 
@@ -101,26 +131,14 @@ const teamSchema = new Schema(
 
     // ---- 4. Proof & Activity Metrics ----
     metrics: {
-      totalCommits: {
-        type: Number,
-        min: 0,
-        default: 0,
-      },
-      totalPRs: {
-        type: Number,
-        min: 0,
-        default: 0,
-      },
-      weeklyCommitTarget: {
-        type: Number,
-        min: 1,
-        default: 10,
-      },
-      lastActivityAt: {
-        type: Date,
-        default: Date.now,
-      },
+      totalCommits: {type: Number, min: 0, default: 0},
+      totalPRs: {type: Number, min: 0, default: 0},
+      weeklyCommitTarget: {type: Number, min: 1, default: 10},
+      lastActivityAt: {type: Date, default: Date.now},
+      projectHealth: {type: Number, min: 0, max: 100, default: 100},
+      teamSynergy: {type: Number, min: 0, max: 100, default: 100}
     },
+
   },
   {
     timestamps: true,
