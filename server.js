@@ -9,12 +9,15 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) =>{
-    res.status(200).json({
-        status: 'API is running',
-        project: 'TeeCode Open Core'
-    });
-});
+// app.get('/', (req, res) =>{
+//     res.status(200).json({
+//         status: 'API is running',
+//         project: 'TeeCode Open Core'
+//     });
+// });
+
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 5000 ;
 app.listen(PORT, ()=>{
