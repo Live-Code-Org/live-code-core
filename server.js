@@ -9,6 +9,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+
 // app.get('/', (req, res) =>{
 //     res.status(200).json({
 //         status: 'API is running',
@@ -16,8 +17,8 @@ app.use(express.json());
 //     });
 // });
 
-const userRoutes = require('./routes/userRoutes');
-app.use('/api/users', userRoutes);
+app.use('/api/teams', require('./routes/teamRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
 
 const PORT = process.env.PORT || 5000 ;
 app.listen(PORT, ()=>{
