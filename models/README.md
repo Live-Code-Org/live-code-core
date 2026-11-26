@@ -1,21 +1,26 @@
-# Models: The Data Contract
+# Models Directory
 
 **Current Version:** `v0.2.0-alpha (MVP)`
 
-## Overview
-This directory defines the **Mongoose Schemas** that serve as the data contract for the **Live Code** platform. 
+This directory defines the Mongoose schemas that serve as the data contract for the Live Code backend.
 
-In accordance with our **Open Core** architecture, our database structures are completely open-source and documented. Contributors and integrators can inspect the exact data shapes, validation rules, and compound indexes powering our matchmaking engine and proof-of-work tracking.
+## Role in Open Core Architecture
 
-## Schemas in This Directory
+In the Live Code **Open Core** model, `models/` is completely public and documented so contributors and integrators can inspect the exact data structures, validation rules, and compound indexes used by the platform.
 
-* **`User.js`:** Developer profiles, matchmaking parameters (`techStack`, `workStyle`, `weeklyHours`), certification status, and the 4-axis rating system (`codeQuality`, `collaboration`, `reliability`, `productImpact`).
-* **`Team.js`:** Project metadata, lifecycle stages (`sandbox` to `market_product`), sub-team hierarchy (`parentTeam`), GitHub App automation configs, and project/team health metrics.
-* **`ScoreEvent.js`:** Immutable audit log for reputation changes, implementing the **14-Day Escrow** (`vestsAt`) and **Shared Fate** (`reviewerIds`) anti-gaming mechanisms.
+- **Public layer (`models/`):** Schema definitions, field constraints, enum values, relationships, and query indexes.
+- **Protected layer (internal services):** Algorithms that compute `reputationScore`, update 4-axis ratings, evaluate team health/synergy, and process 14-day `ScoreEvent` escrow vesting live in separate internal services.
 
-## Development Roadmap & Progress
+## Modules in This Directory
 
-- [x] **User Schema:** Identity, Matchmaking parameters, Certification engine, and 4-Axis Rating model.
-- [x] **Team Schema:** Project metadata, Lifecycle stages, GitHub automation config, and Team/Project metrics.
-- [x] **ScoreEvent Schema:** Reputation event ledger with 14-day vesting escrow and background worker indexing.
-- [ ] **Showcase Schema (Planned):** Public portfolio records for graduated teams and verified contribution breakdowns.
+- `User.js` — Developer profiles including identity (`fullName`, `email`, `githubHandle`, `authProvider`), matchmaking attributes (`status`, `primaryRole`, `skillLevel`, `techStack`, `weeklyHours`, `workStyle`, `currentTeam`), proof-of-work counters, the 4-axis rating model (`codeQuality`, `collaboration`, `reliability`, `productImpact`), and certification metadata (`planTier`, `certification`). Indexed for matchmaking queries.
+- `Team.js` — Team and project records including metadata (`name`, `description`, `techStack`, `status`, `allowDuplicateRoles`), lifecycle and hierarchy (`lifecycleStage`, `parentTeam`), GitHub repository and GitHub App sync configuration (`github`, `githubConfig`), capped team membership (`members`, maximum 5 members with `roleInTeam` and `isAdmin`), and activity/health metrics (`projectHealth`, `teamSynergy`). Indexed for discovery queries.
+- `ScoreEvent.js` — Immutable reputation audit log capturing `authorId`, `reviewerIds` (Shared Fate), `teamId`, `eventType`, non-zero `pointsDelta`, `sourceRef`, and 14-day escrow vesting (`status`, `vestsAt`). Indexed on `{ status, vestsAt }` for background escrow workers.
+
+## Development Roadmap and Progress
+
+- [x] `User` schema: identity, matchmaking fields, 4-axis ratings, certification metadata, and discovery index.
+- [x] `Team` schema: project metadata, `allowDuplicateRoles` policy, lifecycle stages, GitHub config, 5-member cap, and discovery index.
+- [x] `ScoreEvent` schema: reputation ledger with 14-day vesting escrow and worker index.
+- [ ] Schema refinements as authentication and onboarding endpoints are added (In Progress).
+- [ ] `Showcase` schema: public portfolio records for graduated teams and verified contribution breakdowns (Planned).

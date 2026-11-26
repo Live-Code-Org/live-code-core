@@ -39,6 +39,11 @@ const teamSchema = new Schema(
       enum: ['recruiting', 'active', 'graduated', 'archived'],
       default: 'recruiting',
     },
+    allowDuplicateRoles: {
+      type: Boolean,
+      default: false,
+    },
+
     lifecycleStage: {
       type: String,
       enum: ['sandbox', 'mvp', 'beta', 'market_product'],
@@ -114,6 +119,10 @@ const teamSchema = new Schema(
               'DevOps',
               'Team Lead',
             ],
+          },
+          isAdmin: {
+            type: Boolean,
+            default: false,
           },
           joinedAt: {
             type: Date,
